@@ -35,7 +35,7 @@ const Overview = ({ headLogo }) => {
       
           </div>
         </div>
-        <div className='flex flex-col md:flex-row items-center justify-start gap-5 my-5'>
+        <div className='flex flex-col  md:flex-row items-center justify-start gap-5 my-5 '>
           <EmissionBox headtxt={'Emissions for the period'} bottomtxt={'27 tCO2e'}></EmissionBox>
           <EmissionBox headtxt={'Emissions for the period'} bottomtxt={'27 tCO2e'}></EmissionBox>
           <EmissionBox headtxt={'Emissions for the period'} bottomtxt={'27 tCO2e'}></EmissionBox>

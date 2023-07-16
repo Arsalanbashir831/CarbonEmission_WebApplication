@@ -16,7 +16,7 @@ const DataComments = ({ headLogo }) => {
     <>
       <div className="col-span-10 px-5">
         <div className="grid grid-cols-1 gap-5">
-          <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="flex  md:flex-row items-center justify-between">
             <h1 className="font-bold text-3xl">Data Page</h1>
             <Header headLogo={headLogo} />
           </div>

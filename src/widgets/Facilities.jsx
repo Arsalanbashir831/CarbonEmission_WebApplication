@@ -17,7 +17,7 @@ const Facilities = ({ headLogo }) => {
           <h2>Usage - CYBERTIG</h2>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-2 md:gap-0 items-center justify-between">
+        <div className="flex  md:flex-row gap-2 md:gap-0 items-center justify-between">
           <button className="text-white flex gap-2 items-center bg-theme w-full md:w-auto p-3">
             <Link className="flex gap-2" to="/dashboard/AddFacility">
               <AddCircleRounded />

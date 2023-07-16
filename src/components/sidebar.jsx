@@ -10,7 +10,7 @@ import sponser from '../assets/cybertig.png';
 
 const Sidebar = ({ profilepic }) => {
   return (
-    <div className="bg-main text-white h-full p-3">
+    <div className="bg-main text-white h-full p-3 hidden md:block lg:block">
       <div className="grid grid-cols-1 gap-5">
         <div className="flex flex-col items-center justify-center gap-3">
           {/* logo */}

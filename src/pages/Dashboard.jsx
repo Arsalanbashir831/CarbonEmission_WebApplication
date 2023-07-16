@@ -17,7 +17,7 @@ const Dashboard = ({profile}) => {
  
   return (
     <div className=" grid grid-cols-12 bg-contentbg" >
-    <div className="col-span-2">
+    <div className=" col-span-1 md:col-span-2 lg:col-span-2">
       <Sidebar  profilepic={profile} ></Sidebar>
     </div>
     <Routes>

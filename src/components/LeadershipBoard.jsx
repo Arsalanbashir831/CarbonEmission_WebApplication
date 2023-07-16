@@ -25,42 +25,44 @@ const LeadershipBoard = () => {
         <input
           type="text"
           placeholder="Search"
-          className="border border-gray-300 rounded px-3 py-2 w-64"
+          className="border border-gray-300 rounded px-3 py-2 w-full md:w-64"
         />
       </div>
-      <table className="border border-collapse w-full bg-white">
-        <thead>
-          <tr>
-            <th className="border px-3 py-2"></th>
-            <th className="border px-3 py-2">Name</th>
-            <th className="border px-3 py-2">Nationality</th>
-            <th className="border px-3 py-2">Emission</th>
-            <th className="border px-3 py-2">Ranking</th>
-            <th className="border px-3 py-2">TimeFrame</th>
-            <th className="border px-3 py-2">Comparison</th>
-            <th className="border px-3 py-2">Additional Information</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedData.map((item) => (
-            <tr key={item.id}>
-              <td className="border px-3 py-2">
-                <input type="checkbox" />
-              </td>
-              <td className="border px-3 py-2">{item.name}</td>
-              <td className="border px-3 py-2">{item.nationality}</td>
-              <td className="border px-3 py-2">{item.emission}</td>
-              <td className="border px-3 py-2">{item.ranking}</td>
-              <td className="border px-3 py-2">{item.timeframe}</td>
-              <td className="border px-3 py-2">{item.comparison}</td>
-              <td className="border px-3 py-2">{item.additionalInfo}</td>
+      <div className="overflow-x-auto">
+        <table className="border border-collapse w-full bg-white">
+          <thead>
+            <tr>
+              <th className="border px-3 py-2"></th>
+              <th className="border px-3 py-2">Name</th>
+              <th className="border px-3 py-2">Nationality</th>
+              <th className="border px-3 py-2">Emission</th>
+              <th className="border px-3 py-2">Ranking</th>
+              <th className="border px-3 py-2">TimeFrame</th>
+              <th className="border px-3 py-2">Comparison</th>
+              <th className="border px-3 py-2">Additional Information</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="flex justify-center mt-4">
+          </thead>
+          <tbody>
+            {paginatedData.map((item) => (
+              <tr key={item.id}>
+                <td className="border px-3 py-2">
+                  <input type="checkbox" />
+                </td>
+                <td className="border px-3 py-2">{item.name}</td>
+                <td className="border px-3 py-2">{item.nationality}</td>
+                <td className="border px-3 py-2">{item.emission}</td>
+                <td className="border px-3 py-2">{item.ranking}</td>
+                <td className="border px-3 py-2">{item.timeframe}</td>
+                <td className="border px-3 py-2">{item.comparison}</td>
+                <td className="border px-3 py-2">{item.additionalInfo}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="flex flex-col mt-4 sm:flex-row sm:justify-between sm:items-center">
         <nav>
-          <ul className="pagination flex justify-start items-center">
+          <ul className="pagination flex justify-center sm:justify-start items-center">
             <li
               className={`pagination-item ${currentPage === 0 ? 'disabled' : 'hover:bg-gray-200'} px-2 py-1 rounded ${
                 currentPage === 0 ? 'text-gray-500' : 'bg-gray-500 text-white bg-main cursor-pointer'
@@ -90,6 +92,9 @@ const LeadershipBoard = () => {
             </li>
           </ul>
         </nav>
+        <span className="text-sm text-gray-600 mt-2 sm:mt-0">
+          Page {currentPage + 1} of {totalPages}
+        </span>
       </div>
     </div>
   );
