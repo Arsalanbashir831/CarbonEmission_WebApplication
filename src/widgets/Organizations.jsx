@@ -4,16 +4,11 @@ import Header from '../components/header';
 import { AddCircleRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-const Organizations = ({ headLogo }) => {
+const Organizations = () => {
   return (
-    <div className="col-span-10 px-5">
-      <div className="grid grid-cols-1 gap-5">
-        <div className="flex  md:flex-row items-center justify-between">
-          <h1 className="font-bold text-3xl">Manage Organizations</h1>
-          <Header headLogo={headLogo} />
-        </div>
-
-        <div className="bg-theme text-white p-5 flex items-center justify-between">
+   <>
+   
+   <div className="bg-theme text-white p-5 flex items-center justify-between">
           <h2>Usage - CYBERTIG</h2>
         </div>
 
@@ -26,8 +21,11 @@ const Organizations = ({ headLogo }) => {
           </button>
         </div>
         <TableComponent />
-      </div>
-    </div>
+   
+   </>
+
+       
+     
   );
 };
 

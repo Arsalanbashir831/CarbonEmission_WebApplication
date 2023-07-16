@@ -3,7 +3,7 @@ import Contact from '../components/contact';
 import EditForm from '../components/EditForm';
 import Header from '../components/header';
 
-const Settings = ({ profile, headLogo }) => {
+const Settings = ({ profile }) => {
   const [showEditForm, setShowEditForm] = useState(false);
 
   const handleUpdateProfile = () => {
@@ -19,8 +19,7 @@ const Settings = ({ profile, headLogo }) => {
   return (
     <>
       {showEditForm && <EditForm name={'Jonney'} position={'Professional Designer'} email={'abc@gmai.com'} password={'abc'} picture={profile} />}
-      <div onClick={handleOutsideClick} className="col-span-10 px-5 contentWindow ">
-        <Header headLogo={headLogo} />
+      <div onClick={handleOutsideClick} className='contentWindow'>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-center">
           <div className="lg:col-span-1 bg-purewhite p-5">
             <div className="text-left flex flex-col justify-start items-center gap-9">
@@ -42,6 +41,7 @@ const Settings = ({ profile, headLogo }) => {
           </div>
         </div>
       </div>
+      
     </>
   );
 };

@@ -1,6 +1,4 @@
 import React from 'react';
-import { AddCircle } from '@mui/icons-material';
-
 import logo from '../assets/logo.png';
 import Navigation from './navigation';
 import Shortcut from './Shortcut';

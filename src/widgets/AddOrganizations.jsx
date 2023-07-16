@@ -2,15 +2,10 @@ import React from 'react';
 import Header from '../components/header';
 import TextField from '@mui/material/TextField';
 
-const AddOrganization = ({ headLogo }) => {
+const AddOrganization = () => {
   return (
     <>
-      <div className="col-span-10 px-5">
-        <div className="grid grid-cols-1 gap-5">
-          <div className="flex items-center justify-between">
-            <h1 className="font-bold text-3xl">Add Organizations</h1>
-            <Header headLogo={headLogo} />
-          </div>
+     
 
           <div className="bg-theme text-white p-5 flex items-center justify-between">
             <h2>Usage - CYBERTIG</h2>
@@ -33,8 +28,7 @@ const AddOrganization = ({ headLogo }) => {
           </div>
 
           <button className="bg-theme w-full md:w-[50%] mx-auto text-white p-3">Add Organization</button>
-        </div>
-      </div>
+       
     </>
   );
 };

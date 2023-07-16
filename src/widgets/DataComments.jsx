@@ -4,7 +4,7 @@ import { AddBoxRounded } from '@mui/icons-material';
 import PieChart from '../components/PieChart';
 import TextField from '@mui/material/TextField';
 
-const DataComments = ({ headLogo }) => {
+const DataComments = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -14,13 +14,6 @@ const DataComments = ({ headLogo }) => {
 
   return (
     <>
-      <div className="col-span-10 px-5">
-        <div className="grid grid-cols-1 gap-5">
-          <div className="flex  md:flex-row items-center justify-between">
-            <h1 className="font-bold text-3xl">Data Page</h1>
-            <Header headLogo={headLogo} />
-          </div>
-
           <div className="bg-theme text-white p-5 flex flex-col md:flex-row items-center justify-between">
             <h2>Usage - CYBERTIG</h2>
             <label
@@ -61,8 +54,7 @@ const DataComments = ({ headLogo }) => {
           <div>
             <PieChart Addbtn={'false'}></PieChart>
           </div>
-        </div>
-      </div>
+      
     </>
   );
 };
