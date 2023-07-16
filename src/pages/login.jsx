@@ -25,23 +25,23 @@ const Login = () => {
   };
   return (
     <div className="container">
-      <div className="grid grid-cols-2 w-2/4 mx-40 my-10 h-[85%]">
+      <div className="grid grid-cols-1 md:grid-cols-2 mx-5 md:mx-40 my-10 h-full">
         <div className="bg-main text-white p-10">
-          <div className="text-center flex flex-col gap-20">
-            <img className="my-5" src={logo} alt="" />
-            <h2 className="text-3xl">Welcome to the Emission App</h2>
+          <div className="text-center flex flex-col gap-10 md:gap-20">
+            <img className="my-5 w-1/2 mx-auto md:w-auto" src={logo} alt="" />
+            <h2 className="text-2xl md:text-3xl">Welcome to the Emission App</h2>
           </div>
         </div>
-        <div className="pl-10 my-10 w-[40vw]">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-5">
-              <h2 className="text-3xl font-bold">Login</h2>
-              <h5>Hi Welcome back!</h5>
+        <div className="pl-10 my-10 w-full md:w-[40vw]">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-2xl md:text-3xl font-bold">Login</h2>
+              <h5 className="text-sm md:text-base">Hi Welcome back!</h5>
             </div>
             <div className="grid grid-cols-5 justify-center items-center gap-3">
-              <hr />
-              <span className="text-sm text-gray-600 col-span-3 text-center">or login with Email</span>
-              <hr />
+              <hr className="w-full" />
+              <span className="text-sm md:text-base text-gray-600 col-span-3 text-center">or login with Email</span>
+              <hr className="w-full" />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col gap-4">
@@ -82,8 +82,8 @@ const Login = () => {
               </div>
               <div className="text-center">
                 <button type="submit" className="bg-theme text-white w-full p-2 my-2 rounded-md" onClick={handleSubmit}>
-                  <Link to="/dashboard" >  Submit</Link>
-                 </button>
+                  <Link to="/dashboard">Submit</Link>
+                </button>
               </div>
             </div>
           </div>
@@ -92,4 +92,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
