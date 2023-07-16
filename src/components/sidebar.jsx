@@ -11,7 +11,7 @@ const sidebar = ({profilepic,navid}) => {
 
   return (
     <div className='bg-main text-white h-[100%] p-3' >
-      <div className='grid grid-cols-1 gap-3'>
+      <div className='grid grid-cols-1 gap-1'>
         <div className='grid grid-cols-1 justify-center items-center gap-3  '>
           {/* logo */}
           <img src={logo} alt="emission_logo" srcset="" />
