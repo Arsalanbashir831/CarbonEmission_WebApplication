@@ -60,8 +60,8 @@ const EditForm = ({ name, position, email, password, picture }) => {
   };
 
   return (
-    <div className="editModal absolute flex justify-center items-center h-screen left-[40%]">
-      <div className="w-96 p-6 bg-purewhite rounded shadow">
+    <div className="editModal absolute flex justify-center items-center h-screen md:left-[40%] lg:left-[40%] left-[13%]">
+      <div className="w-full md:w-[400px] p-6 bg-purewhite rounded shadow">
         <h2 className="text-2xl font-bold mb-6">Edit Profile</h2>
 
         <form onSubmit={handleSubmit}>

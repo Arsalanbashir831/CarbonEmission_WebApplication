@@ -13,8 +13,10 @@ import Help from '../widgets/Help';
 import Overview from '../widgets/Overview';
 import { Route, Routes } from 'react-router';
 import Header from '../components/header';
+import zIndex from '@mui/material/styles/zIndex';
 
 const Dashboard = ({ profile }) => {
+  const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
 
   // Define a mapping of routes to their corresponding headings
@@ -31,18 +33,30 @@ const Dashboard = ({ profile }) => {
   };
 
   // Get the current route's heading
-  const currentHeading = routeHeadings[location.pathname] || 'Data Page';
+  //absolute z-10 w-[50%]
+  // const responsiveSidebar = {
+  //   zIndex: '10',
+  //   width: '50%',
+  //   position:'absolute'
+  // };
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+  
+  const currentHeading = routeHeadings[location.pathname] || ' ';
 
   return (
-    <div className="grid grid-cols-12 bg-contentbg">
-      <div className="col-span-1 md:col-span-2 lg:col-span-2">
+    <div  className="grid grid-cols-12 bg-contentbg">
+      {/* Add the responsive sidebar code here  */}
+      <div   style={{ zIndex: showSidebar ? '10' : '' , width: showSidebar?'50%':'' , position : showSidebar?'absolute':"" }} 
+      className={`col-span-1 md:col-span-2 lg:col-span-2 lg:block md:block  ${showSidebar ? 'block' : 'hidden'}  `}>
         <Sidebar profilepic={profile}></Sidebar>
       </div>
-      <div className="col-span-10 px-5">
+      <div className="col-span-12 md:col-span-10 lg:col-span-10 px-5">
         <div className="grid grid-cols-1 gap-5">
           <div className="flex md:flex-row items-center justify-between">
             <h1 className="font-bold text-3xl">{currentHeading}</h1>
-            <Header headLogo={headLogo} />
+            <Header toggleSidebar={toggleSidebar} headLogo={headLogo} />
           </div>
           <Routes>
             <Route path="/" element={<Overview headLogo={headLogo}></Overview>} />

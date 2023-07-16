@@ -8,14 +8,14 @@ import sponser from '../assets/cybertig.png';
 
 const Sidebar = ({ profilepic }) => {
   return (
-    <div className="bg-main text-white h-full p-3 hidden md:block lg:block">
+    <div className="bg-main text-white h-full md:p-3 lg:p-3 px-5  ">
       <div className="grid grid-cols-1 gap-5">
         <div className="flex flex-col items-center justify-center gap-3">
           {/* logo */}
           <img src={logo} alt="emission_logo" />
           <hr className="w-4/5 mx-auto" />
         </div>
-        <div className="flex justify-between items-center bg-transbg p-2 rounded-lg">
+        <div className="flex justify-center gap-5 items-center bg-transbg p-2 rounded-lg">
           {/* pic */}
           <img className="w-10 h-10 rounded-3xl" src={profilepic} alt="" />
           <div className="flex flex-col gap-1">
