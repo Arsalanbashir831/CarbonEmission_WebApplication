@@ -12,7 +12,8 @@ export default {
       'main': '#7B3187',
       'transbg':"rgba(255, 255, 255, 0.06)",
       'contentbg':"#F8F8FA",
-      'purewhite':"#ffff"
+      'purewhite':"#ffff",
+      'graybg':'#edebeb'
     },
     
   },

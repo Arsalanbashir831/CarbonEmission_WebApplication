@@ -11,7 +11,9 @@ const navdata=[
     {id : '2' ,name: "Manage Facility" , pic : chart , referenceLink:'/dashboard/Facility'},
     {id : '3' ,name: "Input" , pic : importicon ,  referenceLink:'/dashboard/input'},
     {id : '4' ,name: "Manage Organization" , pic : exporticon ,  referenceLink:'/dashboard/organizations'},
-    {id : '5' ,name: "Talk" , pic : talk ,  referenceLink:'/dashboard/help'}
+    {id : '5' ,name: "Talk" , pic : talk ,  referenceLink:'/dashboard/help'},
+    {id : '6' ,name: "Data Facilities" , pic : graph ,  referenceLink:'/dashboard/datafacilities'},
+    {id : '6' ,name: "My Emission" , pic : graph ,  referenceLink:'/dashboard/myemission'}
 ]
 const navigation = () => {
   return (

@@ -14,6 +14,8 @@ import Overview from '../widgets/Overview';
 import { Route, Routes } from 'react-router';
 import Header from '../components/header';
 import zIndex from '@mui/material/styles/zIndex';
+import ManageDataFacilities from '../widgets/ManageDataFacilities';
+import Emission from '../components/Emission';
 
 const Dashboard = ({ profile }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -22,6 +24,7 @@ const Dashboard = ({ profile }) => {
   // Define a mapping of routes to their corresponding headings
   const routeHeadings = {
     '/dashboard/': 'Dashboard',
+    '/dashboard': 'Dashboard',
     '/dashboard/Facility': 'Manage Facilities',
     '/dashboard/organizations': 'Manage Organizations',
     '/dashboard/input': 'Input Data',
@@ -30,6 +33,9 @@ const Dashboard = ({ profile }) => {
     '/dashboard/settings': 'Settings',
     '/dashboard/AddFacility': 'Add Facility',
     '/dashboard/AddOrganization': 'Add Organization',
+    '/dashboard/datafacilities': 'Manage Data Facilities',
+    '/dashboard/myemission': 'My Emission',
+
   };
 
   // Get the current route's heading
@@ -59,15 +65,17 @@ const Dashboard = ({ profile }) => {
             <Header toggleSidebar={toggleSidebar} headLogo={headLogo} />
           </div>
           <Routes>
-            <Route path="/" element={<Overview headLogo={headLogo}></Overview>} />
-            <Route path="/Facility" element={<Facilities headLogo={headLogo}></Facilities>} />
-            <Route path="/organizations" element={<Organizations headLogo={headLogo}></Organizations>} />
-            <Route path="/input" element={<InputData headLogo={headLogo}></InputData>} />
-            <Route path="/help" element={<Help headLogo={headLogo}></Help>} />
-            <Route path="/data" element={<DataComments headLogo={headLogo}></DataComments>} />
-            <Route path="/settings" element={<Settings profile={profile} headLogo={headLogo}></Settings>} />
-            <Route path="/AddFacility" element={<AddFacility headLogo={headLogo}></AddFacility>} />
-            <Route path="/AddOrganization" element={<AddOrganizations headLogo={headLogo}></AddOrganizations>} />
+            <Route path="/" element={<Overview></Overview>} />
+            <Route path="/Facility" element={<Facilities></Facilities>} />
+            <Route path="/organizations" element={<Organizations></Organizations>} />
+            <Route path="/input" element={<InputData></InputData>} />
+            <Route path="/help" element={<Help ></Help>} />
+            <Route path="/data" element={<DataComments ></DataComments>} />
+            <Route path="/settings" element={<Settings profile={profile} ></Settings>} />
+            <Route path="/AddFacility" element={<AddFacility ></AddFacility>} />
+            <Route path="/AddOrganization" element={<AddOrganizations ></AddOrganizations>} />
+            <Route path="/datafacilities" element={<ManageDataFacilities></ManageDataFacilities>} />
+            <Route path="/myemission" element={<Emission></Emission>} />
           </Routes>
         </div>
       </div>

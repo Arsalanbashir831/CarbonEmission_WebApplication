@@ -1,7 +1,8 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { AddCircleOutline } from '@mui/icons-material';
+
 
 
 const SimpleForm = () => {
@@ -79,7 +80,7 @@ const SimpleForm = () => {
 };
 
 
-const PieChart = ({Addbtn}) => {
+const DonutChart = () => {
   const data = {
     labels: ['Scope 1 ', 'Scope 2', 'Scope 3'],
     datasets: [
@@ -146,25 +147,18 @@ const PieChart = ({Addbtn}) => {
   return (
     <>
       <div className="bg-purewhite flex flex-col p-5">
-        <div>
-          <h1 className="text-xl font-bold">Emission For Period</h1>
-          <h1>All Users</h1>
+        <div className='my-2'>
+          <h1 className="text-xl font-bold">CO2 Emission</h1>
+          <h1 className="text-md text-gray-400 ">All Users</h1>
         </div>
         <div className="h-[30vh]">
-          <Pie data={data} options={config} />
+          <Doughnut  data={data} options={config} />
         </div>
-
         <div>
-        {Addbtn === 'true' && (
-  <div className="btn bg-theme p-3 text-white flex justify-start items-center gap-4 w-32 cursor-pointer">
-    <AddCircleOutline />
-    Add
-  </div>
-)}
         </div>
       </div>
     </>
   );
 };
 
-export default PieChart;
+export default DonutChart;
