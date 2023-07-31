@@ -52,7 +52,7 @@ const DataComments = () => {
           </div>
 
           <div>
-            <PieChart Addbtn={'false'}></PieChart>
+            <PieChart ></PieChart>
           </div>
       
     </>

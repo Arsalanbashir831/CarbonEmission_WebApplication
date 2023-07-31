@@ -35,7 +35,7 @@ const Overview = () => {
           <EmissionBox headtxt={'Emissions for the period'} bottomtxt={'27 tCO2e'}></EmissionBox>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 justify-start items-center my-5 gap-10'>
-          <PieChart Addbtn={'false'}></PieChart>
+          <PieChart></PieChart>
           <BarChart></BarChart>
         </div>
 
