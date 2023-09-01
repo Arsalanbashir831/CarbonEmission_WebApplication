@@ -17,6 +17,7 @@ import zIndex from '@mui/material/styles/zIndex';
 import ManageDataFacilities from '../widgets/ManageDataFacilities';
 import Emission from '../components/Emission';
 import Talk from '../widgets/Talk';
+import Goals from '../widgets/Goals';
 
 const Dashboard = ({ profile }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -37,6 +38,7 @@ const Dashboard = ({ profile }) => {
     '/dashboard/datafacilities': 'Manage Data Facilities',
     '/dashboard/myemission': 'My Emission',
     '/dashboard/Talk': 'Talk',
+    '/dashboard/Goals': 'Goals',
 
   };
 
@@ -73,6 +75,8 @@ const Dashboard = ({ profile }) => {
             <Route path="/datafacilities" element={<ManageDataFacilities></ManageDataFacilities>} />
             <Route path="/myemission" element={<Emission></Emission>} />
             <Route path="/Talk" element={<Talk></Talk>} />
+            <Route path="/Goals" element={<Goals></Goals>} />
+            
           </Routes>
         </div>
       </div>

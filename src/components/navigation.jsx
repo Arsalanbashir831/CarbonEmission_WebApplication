@@ -14,6 +14,7 @@ const navdata=[
     {id : '5' ,name: "Talk" , pic : talk ,  referenceLink:'/dashboard/Talk'},
     {id : '6' ,name: "Data Facilities" , pic : graph ,  referenceLink:'/dashboard/datafacilities'},
     {id : '7' ,name: "My Emission" , pic : chart ,  referenceLink:'/dashboard/myemission'},
+    {id : '8' ,name: "Goals" , pic : graph ,  referenceLink:'/dashboard/Goals'},
 ]
 const navigation = () => {
   return (

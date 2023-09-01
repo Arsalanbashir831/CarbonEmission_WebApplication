@@ -2,21 +2,36 @@ import React, { useState } from 'react';
 
 const LeadershipBoard = () => {
   const pageSize = 5; // Number of items per page
-  const data = [
+  const initialData = [
     { id: 1, name: 'John Doe', nationality: 'Manager', emission: 85, ranking: 85, timeframe: 85, comparison: 85, additionalInfo: 85 },
+    { id: 2, name: 'Ali', nationality: 'Manager', emission: 85, ranking: 85, timeframe: 85, comparison: 85, additionalInfo: 85 },
     // Add more data as needed
   ];
 
+  const [data, setData] = useState(initialData);
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Calculate the total number of pages based on the data length and page size
   const totalPages = Math.ceil(data.length / pageSize);
 
-  // Slice the data based on the current page and page size
   const paginatedData = data.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+  };
+
+  const handleSearchChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    filterData(query);
+  };
+
+  const filterData = (query) => {
+    const filteredData = initialData.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setData(filteredData);
+    setCurrentPage(0);
   };
 
   return (
@@ -25,6 +40,8 @@ const LeadershipBoard = () => {
         <input
           type="text"
           placeholder="Search"
+          value={searchQuery}
+          onChange={handleSearchChange}
           className="border border-gray-300 rounded px-3 py-2 w-full md:w-64"
         />
       </div>
