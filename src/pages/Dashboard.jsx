@@ -35,16 +35,11 @@ const Dashboard = ({ profile }) => {
     '/dashboard/AddOrganization': 'Add Organization',
     '/dashboard/datafacilities': 'Manage Data Facilities',
     '/dashboard/myemission': 'My Emission',
+    '/dashboard/Talk': 'Talk',
 
   };
 
-  // Get the current route's heading
-  //absolute z-10 w-[50%]
-  // const responsiveSidebar = {
-  //   zIndex: '10',
-  //   width: '50%',
-  //   position:'absolute'
-  // };
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
