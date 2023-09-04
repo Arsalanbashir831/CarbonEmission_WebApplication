@@ -4,9 +4,9 @@ import setting from '../assets/Setting.svg'
 import { Link } from 'react-router-dom'
 
 const shortcutsData = [
-    { id:"6", name: 'Help', pic: warning , refrenceLink : '/dashboard/help'},
-    {  id:"7", name: 'Data', pic: setting, refrenceLink : '/dashboard/data' },
-    {  id:"8", name: 'Settings', pic: setting , refrenceLink : '/dashboard/settings' }
+    { id:"10", name: 'Help', pic: warning , refrenceLink : '/dashboard/help'},
+    {  id:"11", name: 'Data', pic: setting, refrenceLink : '/dashboard/data' },
+    {  id:"12", name: 'Settings', pic: setting , refrenceLink : '/dashboard/settings' }
 ]
 
 const Shortcut = () => {

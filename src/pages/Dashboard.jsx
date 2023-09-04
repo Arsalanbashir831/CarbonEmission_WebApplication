@@ -18,6 +18,7 @@ import ManageDataFacilities from '../widgets/ManageDataFacilities';
 import Emission from '../components/Emission';
 import Talk from '../widgets/Talk';
 import Goals from '../widgets/Goals';
+import Sponsers from '../widgets/Sponsers';
 
 const Dashboard = ({ profile }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -39,6 +40,7 @@ const Dashboard = ({ profile }) => {
     '/dashboard/myemission': 'My Emission',
     '/dashboard/Talk': 'Talk',
     '/dashboard/Goals': 'Goals',
+    '/dashboard/Sponsers': 'Sponsers',
 
   };
 
@@ -76,7 +78,7 @@ const Dashboard = ({ profile }) => {
             <Route path="/myemission" element={<Emission></Emission>} />
             <Route path="/Talk" element={<Talk></Talk>} />
             <Route path="/Goals" element={<Goals></Goals>} />
-            
+            <Route path="/Sponsers" element={<Sponsers></Sponsers>} />
           </Routes>
         </div>
       </div>

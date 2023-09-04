@@ -4,6 +4,7 @@ import chart from '../assets/Chart.svg'
 import exporticon from '../assets/export.png'
 import importicon from '../assets/import.png'
 import talk from '../assets/talk.png'
+import louder from '../assets/louder.png'
 import { Link } from 'react-router-dom'
 
 const navdata=[
@@ -15,6 +16,7 @@ const navdata=[
     {id : '6' ,name: "Data Facilities" , pic : graph ,  referenceLink:'/dashboard/datafacilities'},
     {id : '7' ,name: "My Emission" , pic : chart ,  referenceLink:'/dashboard/myemission'},
     {id : '8' ,name: "Goals" , pic : graph ,  referenceLink:'/dashboard/Goals'},
+    {id : '9' ,name: "Sponsers" , pic : louder ,  referenceLink:'/dashboard/Sponsers'},
 ]
 const navigation = () => {
   return (
