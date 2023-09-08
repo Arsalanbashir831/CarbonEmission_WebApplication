@@ -4,6 +4,19 @@ import Header from '../components/header';
 import { AddCircleRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
+const columns = ['Organization Name', 'Organization Type', 'Primary Organization', 'Postcode/Zip', 'External Id'];
+
+const jsonData = [
+  {
+    'Organization Name': 'Data 1',
+    'Organization Type': 'Data 2',
+    'Primary Organization': 'Data 3',
+    'Postcode/Zip': 'Data 4',
+    'External Id': 'Data 5',
+  },
+  
+];
+
 const Organizations = () => {
   return (
    <>
@@ -20,7 +33,7 @@ const Organizations = () => {
             </Link>
           </button>
         </div>
-        <TableComponent />
+        <TableComponent columns={columns} data={jsonData} />
    
    </>
 

@@ -1,8 +1,5 @@
 import logo from "../assets/logo.png";
-
-
 import React, { useState } from 'react';
-
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
@@ -11,9 +8,8 @@ import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import {initializeAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate  } from 'react-router-dom';
-
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -29,12 +25,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app);
 const db = getDatabase(app);
-
-const Login = () => {
-  const navigateTo = useNavigate();
+const Register = () => {
+    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [error,setError] = useState("")
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,22 +39,26 @@ const Login = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     // Handle the form submission with the email and password values
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+        if(formData.email.includes('@gmail.com') || formData.email.includes('@yahoo.com') || formData.email.includes('@hotmail.com') || formData.email.includes('@icloud.com')){
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
-      console.log('Logged in user:', user);
-      navigateTo('/dashboard')
-    
+      console.log('User Created', user);
+      navigate('/');
+        }
+        else{
+            alert("Must Enter valid email");
+        }
+    //   <link to = "./" />
+      // Handle successful login, e.g., redirect to dashboard
     } catch (error) {
-      console.error('Login error:', error);
-      setError("Wrong Credentials")
+      console.error('Registration error:', error);
+      // Handle login error, show error message to user
     }
   };
- 
     console.log('Form Data:', formData);
-   
+    // Add your login logic here
   return (
     
     <div className="container">
@@ -75,15 +73,19 @@ const Login = () => {
         <div className="pl-10 my-10 w-full md:w-[40vw]">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-3">
-              <h2 className="text-2xl md:text-3xl font-bold">Login</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Register</h2>
               <h5 className="text-sm md:text-base">Hi Welcome back!</h5>
             </div>
             <div className="grid grid-cols-5 justify-center items-center gap-3">
               <hr className="w-full" />
-              <span className="text-sm md:text-base text-gray-600 col-span-3 text-center">or login with Email</span>
+              <span className="text-sm md:text-base text-gray-600 col-span-3 text-center">Register with Email</span>
               <hr className="w-full" />
             </div>
-           
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-4">
+                <a href=""></a>
+              </div>
+              </div>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col gap-4">
                 <label htmlFor="Email">Email</label>
@@ -123,16 +125,13 @@ const Login = () => {
               </div>
               <div className="text-center">
                 <button type="submit" className="bg-theme text-white w-full p-2 my-2 rounded-md" onClick={handleSubmit}>
-                 Submit
+                  Submit
                 </button>
-                <div className="flex flex-col gap-2">
-              <div className="flex flex-col gap-4">
-              <Link to="/Register">
-            <a className=" text-blue-500" >Create Account</a>
+                <div className="flex flex-col gap-4">
+              <Link to="/">
+            <a className=" text-blue-500" >Already Have Account</a>
           </Link>
               </div>
-              </div>
-                <p className="text-red-600" >{error}</p>
               </div>
             </div>
           </div>
@@ -145,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
