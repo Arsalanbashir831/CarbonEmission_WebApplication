@@ -31,8 +31,8 @@ const db = getFirestore(app);
 const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: '', username: '', profession: '', pic: null, password: '' });
-
+  const [formData, setFormData] = useState({ email: '', username: '', profession: '', pic: null,  password: '' });
+  const [error,setError]=useState("")
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleInputChange = (event) => {
@@ -44,10 +44,9 @@ const Register = () => {
   };
 
   const handleFileInputChange = (event) => {
-    const file = event.target.files[0]; // Get the first selected file
+    const file = event.target.files[0]; 
 
     if (file) {
-      // Store the selected file in the formData state
       setFormData((prevFormData) => ({
         ...prevFormData,
         pic: file,
@@ -72,26 +71,19 @@ const Register = () => {
         );
         const user = userCredential.user;
         console.log('User Created', user);
-        let pictureUrl = ''; // Initialize an empty string for the picture URL
+        let pictureUrl = '';
 
         if (formData.pic) {
-          // Check if a picture is selected
           const pictureFile = formData.pic;
-
-          // You can handle picture upload here, e.g., using Firebase Storage
-          // For simplicity, we'll just convert the picture to base64
           const reader = new FileReader();
-
           reader.onload = async (e) => {
-            pictureUrl = e.target.result; // Get the base64-encoded image data
-
-            // After handling the image, add user data to Firestore
+            pictureUrl = e.target.result; 
             const userRef = collection(db, 'User');
             await addDoc(userRef, {
               email: formData.email,
               username: formData.username,
               profession: formData.profession,
-              picture: pictureUrl, // Include the base64-encoded image data
+              picture: pictureUrl, 
             });
             navigate('/');
           };
@@ -109,6 +101,7 @@ const Register = () => {
         }
       } else {
         alert('Must Enter a valid email');
+        setError("This email already in use")
       }
     } catch (error) {
       console.error('Registration error:', error);
@@ -117,7 +110,6 @@ const Register = () => {
   };
   
   console.log('Form Data:', formData);
-  // Add your login logic here
   return (
 
     <div className="container">
@@ -216,6 +208,7 @@ const Register = () => {
                 <button type="submit" className="bg-theme text-white w-full p-2 my-2 rounded-md" onClick={handleSubmit}>
                   Submit
                 </button>
+                <p className="text-red-500">{error}</p>
                 <div className="flex flex-col gap-4">
                   <Link to="/">
                     <a className=" text-blue-500" >Already Have Account</a>
