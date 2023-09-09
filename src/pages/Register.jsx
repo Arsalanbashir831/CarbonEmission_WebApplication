@@ -6,10 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
-import {initializeAuth } from "firebase/auth";
+import { initializeAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
-import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection } from 'firebase/firestore';
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -24,12 +26,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app);
-const db = getDatabase(app);
+const db = getFirestore(app);
+
 const Register = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', username: '', profession: '', pic: null, password: '' });
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -37,32 +42,86 @@ const Register = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // Handle the form submission with the email and password values
-    try {
-        if(formData.email.includes('@gmail.com') || formData.email.includes('@yahoo.com') || formData.email.includes('@hotmail.com') || formData.email.includes('@icloud.com')){
-      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      const user = userCredential.user;
-      console.log('User Created', user);
-      navigate('/');
-        }
-        else{
-            alert("Must Enter valid email");
-        }
-    //   <link to = "./" />
-      // Handle successful login, e.g., redirect to dashboard
-    } catch (error) {
-      console.error('Registration error:', error);
-      // Handle login error, show error message to user
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0]; // Get the first selected file
+
+    if (file) {
+      // Store the selected file in the formData state
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        pic: file,
+      }));
     }
   };
-    console.log('Form Data:', formData);
-    // Add your login logic here
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      if (
+        formData.email.includes('@gmail.com') ||
+        formData.email.includes('@yahoo.com') ||
+        formData.email.includes('@hotmail.com') ||
+        formData.email.includes('@icloud.com')
+      ) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        const user = userCredential.user;
+        console.log('User Created', user);
+        let pictureUrl = ''; // Initialize an empty string for the picture URL
+
+        if (formData.pic) {
+          // Check if a picture is selected
+          const pictureFile = formData.pic;
+
+          // You can handle picture upload here, e.g., using Firebase Storage
+          // For simplicity, we'll just convert the picture to base64
+          const reader = new FileReader();
+
+          reader.onload = async (e) => {
+            pictureUrl = e.target.result; // Get the base64-encoded image data
+
+            // After handling the image, add user data to Firestore
+            const userRef = collection(db, 'User');
+            await addDoc(userRef, {
+              email: formData.email,
+              username: formData.username,
+              profession: formData.profession,
+              picture: pictureUrl, // Include the base64-encoded image data
+            });
+            navigate('/');
+          };
+
+          reader.readAsDataURL(pictureFile); // Read the file as a data URL
+        } else {
+          // If no picture is selected, add user data to Firestore without a picture
+          const userRef = collection(db, 'User');
+          await addDoc(userRef, {
+            email: formData.email,
+            username: formData.username,
+            profession: formData.profession,
+          });
+          navigate('/');
+        }
+      } else {
+        alert('Must Enter a valid email');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      // Handle login error, show error message to the user
+    }
+  };
+  
+  console.log('Form Data:', formData);
+  // Add your login logic here
   return (
-    
+
     <div className="container">
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 mx-5 md:mx-40 my-10 h-full">
         <div className="bg-main text-white p-10">
           <div className="text-center flex flex-col gap-10 md:gap-20">
@@ -85,7 +144,7 @@ const Register = () => {
               <div className="flex flex-col gap-4">
                 <a href=""></a>
               </div>
-              </div>
+            </div>
             <div className="flex flex-col gap-2">
               <div className="flex flex-col gap-4">
                 <label htmlFor="Email">Email</label>
@@ -97,6 +156,36 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
+              </div>
+              <div className="flex flex-col gap-4">
+                <label htmlFor="Username">Username</label>
+                <TextField
+                  fullWidth
+                  id="demo-helper-text-aligned"
+                  label="Username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-4">
+                <label htmlFor="Username">Profession</label>
+                <TextField
+                  fullWidth
+                  id="demo-helper-text-aligned"
+                  label="Profession"
+                  name="profession"
+                  value={formData.profession}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col gap-4">
+              <input
+                type="file"
+                accept="image/*"  // Allow only image files
+                name="pic"
+                onChange={handleFileInputChange}
+              />
               </div>
               <div className="flex flex-col gap-4">
                 <label htmlFor="password">Password</label>
@@ -128,19 +217,19 @@ const Register = () => {
                   Submit
                 </button>
                 <div className="flex flex-col gap-4">
-              <Link to="/">
-            <a className=" text-blue-500" >Already Have Account</a>
-          </Link>
-              </div>
+                  <Link to="/">
+                    <a className=" text-blue-500" >Already Have Account</a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
 
-    
+
   );
 };
 
