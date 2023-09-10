@@ -29,14 +29,6 @@ const Login = () => {
     // Handle the form submission with the email and password values
      await Firebase.loginUser(formData.email, formData.password); 
   };
- 
-  
-  
-  
-  
-  
-  
- 
     console.log('Form Data:', formData);
    
   return (
