@@ -5,34 +5,16 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from "react-router-dom";
-import { initializeApp } from "firebase/app";
-import { initializeAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { addDoc, collection } from 'firebase/firestore';
-import { getFirestore } from "firebase/firestore";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBJqPPNev6wFtH8SBc52wKsBYAEOLi9Phk",
-  authDomain: "carbonemission-90d5e.firebaseapp.com",
-  projectId: "carbonemission-90d5e",
-  storageBucket: "carbonemission-90d5e.appspot.com",
-  messagingSenderId: "338386071282",
-  appId: "1:338386071282:web:ff58f050f34be2f308aa6b"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = initializeAuth(app);
-const db = getFirestore(app);
+import { useFirebase } from "../context/Firebase";
 
 const Register = () => {
+ const firebase = useFirebase()
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', username: '', profession: '', pic: null,  password: '' });
-  const [error,setError]=useState("")
+  const [error, setError] = useState("");
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleInputChange = (event) => {
@@ -56,58 +38,26 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      if (
-        formData.email.includes('@gmail.com') ||
-        formData.email.includes('@yahoo.com') ||
-        formData.email.includes('@hotmail.com') ||
-        formData.email.includes('@icloud.com')
-      ) {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
-        );
-        const user = userCredential.user;
-        console.log('User Created', user);
-        let pictureUrl = '';
-
-        if (formData.pic) {
-          const pictureFile = formData.pic;
-          const reader = new FileReader();
-          reader.onload = async (e) => {
-            pictureUrl = e.target.result; 
-            const userRef = collection(db, 'User');
-            await addDoc(userRef, {
-              email: formData.email,
-              username: formData.username,
-              profession: formData.profession,
-              picture: pictureUrl, 
-            });
-            navigate('/');
-          };
-
-          reader.readAsDataURL(pictureFile); // Read the file as a data URL
-        } else {
-          // If no picture is selected, add user data to Firestore without a picture
-          const userRef = collection(db, 'User');
-          await addDoc(userRef, {
-            email: formData.email,
-            username: formData.username,
-            profession: formData.profession,
-          });
-          navigate('/');
-        }
-      } else {
-        alert('Must Enter a valid email');
-        setError("This email already in use")
+      // Sign up the user using Firebase authentication
+      await firebase.signupUserEmailandPass(formData.email, formData.password);
+      // Store user data in Firebase Firestore
+      const { email, username, profession, pic } = formData;
+      try{
+        const userData = await firebase.storeUserDataInFirebase(email, username, profession, pic);
+          // Handle successful registration
+      console.log('User data stored:', userData);
+      }catch(err){
+        setError(err)
       }
-    } catch (error) {
-      console.error('Registration error:', error);
-      // Handle login error, show error message to the user
+    
+      // Redirect to another page after successful registration
+      navigate('/'); // Replace with the desired destination
+
+    } catch (err) {
+      setError(err.message);
     }
-  };
+  }
   
   console.log('Form Data:', formData);
   return (
