@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Sidebar from '../components/sidebar';
 import Settings from '../widgets/Settings';
@@ -19,8 +19,39 @@ import Emission from '../components/Emission';
 import Talk from '../widgets/Talk';
 import Goals from '../widgets/Goals';
 import Sponsers from '../widgets/Sponsers';
+import db from '../context/db';
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore/lite';
 
 const Dashboard = ({ profile }) => {
+
+  const [info, setInfo] = useState({});
+ 
+    // Start the fetch operation as soon as
+    // the page loads
+ 
+    // Fetch the required data using the get() method
+    const Fetchdata = async () => {
+      
+      const userRef = await collection(db, "User");
+
+      const q = await query(userRef, where("email", "==", localStorage.getItem("email")));
+      console.log(q)
+      
+
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+
+          setInfo(doc.data())
+      });
+    }
+
+    useEffect(()=>{
+      console.log("meow")
+      Fetchdata();
+    },[])
+
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
 
@@ -52,11 +83,13 @@ const Dashboard = ({ profile }) => {
   const currentHeading = routeHeadings[location.pathname] || ' ';
 
   return (
+    
     <div  className="grid grid-cols-12 bg-contentbg">
+      {console.log(info)}
       {/* Add the responsive sidebar code here  */}
       <div   style={{ zIndex: showSidebar ? '10' : '' , width: showSidebar?'50%':'' , position : showSidebar?'absolute':"" }} 
       className={`col-span-1 md:col-span-2 lg:col-span-2 lg:block md:block  ${showSidebar ? 'block' : 'hidden'}  `}>
-        <Sidebar profilepic={profile}></Sidebar>
+        <Sidebar username = {info.username} profession = {info.profession} profilepic={info.picture}></Sidebar>
       </div>
       <div className="col-span-12 md:col-span-10 lg:col-span-10 px-5">
         <div className="grid grid-cols-1 gap-5">

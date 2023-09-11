@@ -6,7 +6,7 @@ import arrows from '../assets/unfold_more.svg';
 import rectangle from '../assets/Rectangle.svg';
 import sponser from '../assets/cybertig.png';
 
-const Sidebar = ({ profilepic }) => {
+const Sidebar = ({ profilepic, username, profession }) => {
   return (
     <div className="bg-main text-white h-full md:p-3 lg:p-3 px-5  ">
       <div className="grid grid-cols-1 gap-5">
@@ -19,8 +19,8 @@ const Sidebar = ({ profilepic }) => {
           {/* pic */}
           <img className="w-10 h-10 rounded-3xl" src={profilepic} alt="" />
           <div className="flex flex-col gap-1">
-            <h4 className="font-bold">Joney</h4>
-            <h4 className="text-sm font-semibold text-gray-300">Project Manager</h4>
+            <h4 className="font-bold">{username? username.slice(0,4): "..."}</h4>
+            <h4 className="text-sm font-semibold text-gray-300">{profession? profession.slice(0,4) : "..."}</h4>
           </div>
         </div>
         <div>

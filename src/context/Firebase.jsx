@@ -38,6 +38,7 @@ export const FirebaseProvider = (props) => {
         try {
           const userCredential = await signInWithEmailAndPassword(auth, email, pass);
           const user = userCredential.user;
+          localStorage.setItem("email", email);
           navigateTo('/dashboard'); // Use navigate instead of navigateTo
           console.log("User Logged In:", user);
         } catch (error) {
