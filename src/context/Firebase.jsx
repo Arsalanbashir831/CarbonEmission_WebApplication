@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react"; // Added useContext
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"; // Corrected import for createUserWithEmailAndPassword
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, addDoc, collection,setDoc,doc } from 'firebase/firestore';
 import { useNavigate  } from 'react-router-dom';
 const FirebaseContext = createContext(null);
 
@@ -72,8 +72,45 @@ export const FirebaseProvider = (props) => {
           console.error("Error storing user data:", error.message);
         }
       }
+
+
+      const AddFacility = async (fname,postalCode,ftype,pfaculty,email)=>{
+        try {
+          const userRef = collection(db, 'Facility');
+          await addDoc(userRef, {
+            FacultyName: fname,
+            PostalCode: postalCode,
+            FacultyType: ftype,
+            PFaculty :pfaculty,
+            email:email
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+     
+      const AddOrganization = async (orgname,repYr,indSec,repCurr,accType,revProd,repPeriod1,repPeriod2,FTE,email)=>{
+        try {
+          const userRef = collection(db, 'Organization');
+          await addDoc(userRef, {
+            OragnizationName: orgname,
+            ReportingYearEnd: repYr,
+            IndustrySector: indSec,
+            ReportingCurrency :repCurr,
+            AccountType:accType,
+            RevandProd :revProd,
+            RepPeriod1:repPeriod1,
+            RepPeriod2:repPeriod2,
+            Fte : FTE,
+            email:email
+          });
+        } catch (error) {
+          
+        }
+      }
+ 
     return (
-        <FirebaseContext.Provider value={{ signupUserEmailandPass,storeUserDataInFirebase,loginUser }}>
+        <FirebaseContext.Provider value={{ signupUserEmailandPass,storeUserDataInFirebase,loginUser,AddFacility,AddOrganization }}>
             {props.children}
         </FirebaseContext.Provider>
     );

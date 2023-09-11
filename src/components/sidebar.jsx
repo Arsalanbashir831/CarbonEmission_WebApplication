@@ -19,8 +19,8 @@ const Sidebar = ({ profilepic, username, profession }) => {
           {/* pic */}
           <img className="w-10 h-10 rounded-3xl" src={profilepic} alt="" />
           <div className="flex flex-col gap-1">
-            <h4 className="font-bold">{username? username.slice(0,4): "..."}</h4>
-            <h4 className="text-sm font-semibold text-gray-300">{profession? profession.slice(0,4) : "..."}</h4>
+            <h4 className="font-bold">{username? username.slice(0,10): "..."}</h4>
+            <h4 className="text-sm font-semibold text-gray-300">{profession? profession.slice(0,10) : "..."}</h4>
           </div>
         </div>
         <div>
