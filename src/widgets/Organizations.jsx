@@ -1,10 +1,11 @@
-import React from 'react';
+import {React,useState,useEffect} from 'react';
 import TableComponent from '../components/Table';
 import Header from '../components/header';
 import { AddCircleRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useFirebase } from '../context/Firebase';
 
-const columns = ['Organization Name', 'Organization Type', 'Primary Organization', 'Postcode/Zip', 'External Id'];
+const columns = ['OragnizationName', 'IndustrySector', 'Fte', 'AccountType'];
 
 const jsonData = [
   {
@@ -18,6 +19,20 @@ const jsonData = [
 ];
 
 const Organizations = () => {
+  const firebase = useFirebase()
+  const [organizations, setOrganizations] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const organizationData = await firebase.fetchOrganizationData(localStorage.getItem('email'));
+        setOrganizations(organizationData);
+      } catch (error) {
+        console.error("Error fetching Facility data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
    <>
    
@@ -33,7 +48,7 @@ const Organizations = () => {
             </Link>
           </button>
         </div>
-        <TableComponent columns={columns} data={jsonData} />
+        <TableComponent columns={columns} data={organizations} />
    
    </>
 

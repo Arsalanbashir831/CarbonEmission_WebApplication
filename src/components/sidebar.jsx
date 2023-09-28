@@ -5,6 +5,7 @@ import Shortcut from './Shortcut';
 import arrows from '../assets/unfold_more.svg';
 import rectangle from '../assets/Rectangle.svg';
 import sponser from '../assets/cybertig.png';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ profilepic, username, profession }) => {
   return (
@@ -39,7 +40,7 @@ const Sidebar = ({ profilepic, username, profession }) => {
         {/* sponsors and logout */}
         <div className="grid grid-cols-3 items-center justify-start gap-2">
           <img className="shadow-black shadow-md w-10 h-10 rounded-3xl" src={profilepic} alt="" />
-          <h4>Logout</h4>
+          <h4> <Link to="/" >Logout</Link> </h4>
           <img className="w-5 h-5 my-1" src={arrows} alt="" />
         </div>
         <div className="flex flex-col gap-3 my-2 justify-center items-center">

@@ -1,8 +1,9 @@
 import { createContext, useContext } from "react"; // Added useContext
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"; // Corrected import for createUserWithEmailAndPassword
-import { getFirestore, addDoc, collection,setDoc,doc } from 'firebase/firestore';
+import { getFirestore, addDoc, collection,setDoc,doc ,getDocs} from 'firebase/firestore';
 import { useNavigate  } from 'react-router-dom';
+
 const FirebaseContext = createContext(null);
 
 const firebaseConfig = {
@@ -108,9 +109,51 @@ export const FirebaseProvider = (props) => {
           
         }
       }
- 
+
+      const fetchFacilityData = async (email) => {
+        try {
+          const facilityCollectionRef = collection(db, 'Facility');
+          const querySnapshot = await getDocs(facilityCollectionRef);
+      
+          const facilityData = [];
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.email === email) {
+              facilityData.push({ id: doc.id, ...data });
+            }
+          });
+      
+          return facilityData;
+        } catch (error) {
+          console.error("Error fetching Facility data:", error.message);
+          throw error;
+        }
+      }
+      
+     
+
+      const fetchOrganizationData = async (email) => {
+        try {
+          const organizationCollectionRef = collection(db, 'Organization');
+          const querySnapshot = await getDocs(organizationCollectionRef);
+      
+          const organizationData = [];
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.email === email) {
+              organizationData.push({ id: doc.id, ...data });
+            }
+          });
+      
+          return organizationData;
+        } catch (error) {
+          console.error("Error fetching Facility data:", error.message);
+          throw error;
+        }
+      }
+      
     return (
-        <FirebaseContext.Provider value={{ signupUserEmailandPass,storeUserDataInFirebase,loginUser,AddFacility,AddOrganization }}>
+        <FirebaseContext.Provider value={{ signupUserEmailandPass,storeUserDataInFirebase,loginUser,AddFacility,AddOrganization,fetchFacilityData,fetchOrganizationData }}>
             {props.children}
         </FirebaseContext.Provider>
     );

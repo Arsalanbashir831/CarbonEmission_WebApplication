@@ -1,24 +1,28 @@
-import React from 'react';
+import {React,useState,useEffect} from 'react';
 import TableComponent from '../components/Table';
-import Header from '../components/header';
+
 import { AddCircleRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useFirebase } from '../context/Firebase';
 
-const columns = ['Faculty Name', 'Faculty Type', 'Primary Faculty', 'Postcode/Zip', 'External Id'];
-
-const jsonData = [
-  {
-    'Faculty Name': 'Data 1',
-    'Faculty Type': 'Data 2',
-    'Primary Faculty': 'Data 3',
-    'Postcode/Zip': 'Data 4',
-    'External Id': 'Data 5',
-  },
-  
-];
-
-
+const columns = ['FacultyName', 'FacultyType', 'PFaculty', 'PostalCode'];
 const Facilities = () => {
+  const firebase = useFirebase()
+  const [facilities, setFacilities] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const facilityData = await firebase.fetchFacilityData(localStorage.getItem('email'));
+        setFacilities(facilityData);
+      } catch (error) {
+        console.error("Error fetching Facility data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(facilities);
   return (
   <>
    <div className="bg-theme text-white p-5 flex items-center justify-between">
@@ -34,7 +38,7 @@ const Facilities = () => {
           </button>
         </div>
 
-        <TableComponent columns={columns} data={jsonData} />
+        <TableComponent columns={columns} data={facilities} />
   
   </>
 

@@ -13,7 +13,7 @@ function TableComponent({ columns, data }) {
                 {columnName}
               </TableCell>
             ))}
-            <TableCell align="center">Actions</TableCell>
+            {/* <TableCell align="center">Actions</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -25,12 +25,10 @@ function TableComponent({ columns, data }) {
                 </TableCell>
               ))}
               <TableCell colSpan={3} align="center">
-                <Button>
-                  <EditRoadOutlined />
-                </Button>
-                <Button color="warning">
+               
+                {/* <Button color="warning">
                   <Delete />
-                </Button>
+                </Button> */}
               </TableCell>
             </TableRow>
           ))}
