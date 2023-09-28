@@ -8,46 +8,65 @@ const AddForm = ({ onClose }) => {
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-70 ">
       <form className="bg-white p-8 rounded-lg shadow-lg w-80 bg-purewhite">
         <div className='flex justify-between items-center'>
-        <h2 className="text-2xl font-bold mb-4">Add Input</h2>
-        <h1  onClick={onClose} className='text-red-500 cursor-pointer'> <CloseSharp ></CloseSharp> </h1>
+          <h2 className="text-2xl font-bold mb-4">Add Input</h2>
+          <h1 onClick={onClose} className='text-red-500 cursor-pointer'> <CloseSharp ></CloseSharp> </h1>
         </div>
         {/* Input 1 */}
         <div className="mb-4">
-          <label htmlFor="input1" className="block font-semibold text-gray-800 mb-1">
-            Input 1
+          <label htmlFor="scope" className="block font-semibold text-gray-800 mb-1">
+            Select Scope
           </label>
-          <input
-            type="text"
-            id="input1"
+          <select
+            id="scope"
+            name="scope"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-          />
+          >
+            <option value="Scope 1">Scope 1</option>
+            <option value="Scope 2">Scope 2</option>
+            <option value="Scope 3">Scope 3</option>
+          
+          </select>
         </div>
+
 
         {/* Input 2 */}
         <div className="mb-4">
           <label htmlFor="input2" className="block font-semibold text-gray-800 mb-1">
-            Input 2
+            Type of Fuel
           </label>
           <input
             type="text"
-            id="input2"
+            id="typeOfFuel"
+            name='typeOfFuel'
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
-
         {/* Input 3 */}
         <div className="mb-6">
           <label htmlFor="input3" className="block font-semibold text-gray-800 mb-1">
-            Input 3
+            Enter Unit
           </label>
           <input
             type="text"
-            id="input3"
+            name='unit'
+            id="unit"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        {/* Input 4 */}
+        <div className="mb-6">
+          <label htmlFor="input3" className="block font-semibold text-gray-800 mb-1">
+            Enter Value
+          </label>
+          <input
+            name='value'
+            type="text"
+            id="value"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
           />
           <div className='bg-theme text-white text-center p-2 my-5 cursor-pointer'>
-            <input className='cursor-pointer'  type="submit" value="Submit" />
-            </div>
+            <input className='cursor-pointer' type="submit" value="Submit" />
+          </div>
         </div>
 
         {/* Close button */}
@@ -85,7 +104,7 @@ const InputData = () => {
 
   return (
     <>
-       <div className="bg-theme text-white p-5 flex flex-col md:flex-row items-center justify-between">
+      <div className="bg-theme text-white p-5 flex flex-col md:flex-row items-center justify-between">
         <h2>Usage - CYBERTIG</h2>
         <label
           htmlFor="file-input"
@@ -112,10 +131,10 @@ const InputData = () => {
       </div>
       <div className='bg-purewhite p-4'>
         <PieChart ></PieChart>
-      <div className="btn bg-theme p-2 text-white flex justify-start items-center gap-4 w-32 cursor-pointer" onClick={handleAddClick}>
-        <AddCircleOutline />
-        Add
-      </div>
+        <div className="btn bg-theme p-2 text-white flex justify-start items-center gap-4 w-32 cursor-pointer" onClick={handleAddClick}>
+          <AddCircleOutline />
+          Add
+        </div>
       </div>
 
 

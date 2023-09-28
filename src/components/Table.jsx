@@ -31,9 +31,6 @@ function TableComponent({ columns, data }) {
                 <Button color="warning">
                   <Delete />
                 </Button>
-                <Button color="success">
-                  <RemoveRedEyeOutlined />
-                </Button>
               </TableCell>
             </TableRow>
           ))}
